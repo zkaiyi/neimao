@@ -1,0 +1,85 @@
+.bg{
+	background: #74C1B5;width: 100%;height: 14rem;position: absolute;
+}
+.clear{
+	clear: both;
+}
+.title{
+	width: 40%;text-align: center;float: left;height: 100%;color: #FFFFFF;
+}
+.login{
+	width: 60%;float: left;height: 100%;
+}
+.content{
+	height: 25rem;width: 100%;position: absolute;
+}
+.title p{
+	height: 3rem;line-height: 3rem;
+}
+.title p:nth-child(1){
+	margin-top: 9rem;font-size: 2em;
+}
+.title p:nth-child(2){
+	font-size: 3rem;
+}
+.container{
+	height: 100%;width: 90%;border: 1px solid gainsboro;background-color: #FFFFFF;border-radius: 2%;
+}
+.container-left{
+	width: 40%;float: left;text-align: center;
+}
+.container-left-img{
+	height: 80%;border-radius: 50%;background:url(../img/logo.png) no-repeat center/contain ;border: 1px solid #74C1B5;margin: 0 auto;
+}
+
+.container-right{
+	width: 60%;float: left;
+}
+::-webkit-input-placeholder {
+    color: #ffffff;
+}
+:-moz-placeholder { 
+    color: #ffffff;
+}
+::-moz-placeholder {
+    color: #ffffff;
+}
+:-ms-input-placeholder {
+    color: #ffffff;
+}
+.container-right input{
+	background-color: #74C1B5;border: none;color: #FFFFFF;font-size: 1.5rem;border-radius: 5px;
+}
+.up{
+	width: 90%;margin-top: 3.5rem;
+}
+.container-input1{
+	width: 80%;padding-left: 5%;height: 3rem;line-height: 3rem;
+}
+.container-input2{
+	width: 95%;padding-left: 10%;height: 2rem;line-height: 2rem;
+}
+.tips{
+	color: red;height: 1.5rem;line-height: 1.5rem;font-size: 0.7rem;visibility: hidden;
+}
+.yzm{
+	width: 90%;
+}
+.yzm-input{
+	width: 50%;float: left;
+}
+.username{
+	margin-top: 2rem;
+}
+.yzm-img{
+	width: 35%;float: left;margin-left: 5%;
+}
+.yzm-imgs{
+	width: 80%;height: 2rem;background: gainsboro;
+}
+.yzm-img a{
+	font-size: 0.7rem;cursor: pointer;
+}
+.submit{
+	width: 30%;height: 3rem;line-height:3rem;background-color: #74C1B5;border: none;color: #FFFFFF;border-radius: 5px;font-size: 1rem;margin-top: 2rem;
+}

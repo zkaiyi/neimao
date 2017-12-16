@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>产品添加</title>
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/main.css" />
+		<link rel="stylesheet" href="../../css/data-container.css" />		<link rel="shortcut icon" type="image/x-icon" href="../../img/nm.ico" media="screen" />
+		<style>
+
+			.data-container-parts{
+				width: 16.6%;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="title">后台国内销售业务员系统</div>
+			<img src="../../img/quit.png" />
+			<p>Hello，<a id="name"></a></p>
+		</header>
+		<div class="content">
+			<div class="content-left">				<ul>					<li id="agreement"><a href="../protocols/protocols.html">终端管理</a></li>					<li id="order"><a href="../deliveryNotes/deliveryNotes.html">订单管理</a></li>					<li id="visit"><a href="../visit/visit.html">未开发终端管理</a></li>					<li id="product" class="active"><a href="products.html">产品管理</a></li>					<li id="user"><a href="../user/user.html">人员管理</a></li>				</ul>			</div>
+			<div class="content-right">
+					<p class="data-container-return">
+						<a href="products.html">产品管理</a>
+						<a class="split">/</a>
+						<a>产品添加</a>
+					</p>
+					<div class="inputs" style="display: block;">
+					<div class="inputs-section">
+						<a>产品名称</a><input class="productName" type="text" placeholder="请输入产品名称" />
+					</div>
+					<div class="inputs-section">
+						<p class="save-tip">请填写产品名称！</p>
+					</div>	
+					<div class="inputs-section">
+						<button class="save">保存</button>
+
+					</div>	
+				</div>
+			</div>
+			<div class="clear"></div>
+			
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/jquery-3.2.1.js" ></script>
+	<script type="text/javascript" src="../../js/url_path.js" ></script>
+	<script type="text/javascript" src="../../js/main.js"></script>
+	<script>
+		$(function(){
+
+			
+			$(".save").click(function(){
+				var productName = $(".productName").val();
+				
+				$.ajax({
+					url:url_path+"/addProduct",
+					type:"post",
+					data:{
+						"productName":productName
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.status=="yes"){
+							$(".save-tip").css({"visibility":"visible","color":"#73BCB5"}).html("添加成功！");
+							setTimeout(function(){
+								window.location.href="products.html"
+							},1000)
+						}else if(data.status=="no"){
+							$(".save-tip").css("visibility","visible");
+						}
+					},
+					error:function(){}
+				})
+			})
+
+		})
+	</script>
+</html>

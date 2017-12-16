@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>产品添加</title>
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/main.css" />
+		<link rel="stylesheet" href="../../css/data-container.css" />		<link rel="shortcut icon" type="image/x-icon" href="../../img/nm.ico" media="screen" />
+		<style>
+
+			.data-container-parts{
+				width: 16.6%;
+			}
+			.upimg{
+				width: 45%;height: 14rem;line-height: 14rem;display: inline-block;text-align: center;background: gainsboro;
+				position: relative;
+			}
+			.inputs-section .up-btn{
+				position: absolute;top: 0;left: 0;height: 14rem;width: 92%;margin-top: 1rem;border: none;cursor: pointer;
+				z-index: 3;opacity: 0;
+			}
+			.up-pic{
+				position: absolute;top: 0;left: 0;height: 14rem;width: 100%;z-index: 2;
+			}
+			.up-pic img{
+				height: 12rem;margin-top: 1rem;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="title">后台国内销售业务员系统</div>
+			<img src="../../img/quit.png" />
+			<p>Hello，<a id="name"></a></p>
+		</header>
+		<div class="content">
+			<div class="content-left">				<ul>					<li id="agreement"><a href="../protocols/protocols.html">终端管理</a></li>					<li id="order"><a href="../deliveryNotes/deliveryNotes.html">订单管理</a></li>					<li id="visit"><a href="../visit/visit.html">未开发终端管理</a></li>					<li id="product" class="active"><a href="products.html">产品管理</a></li>					<li id="user"><a href="../user/user.html">人员管理</a></li>				</ul>			</div>
+			<div class="content-right">
+				<p class="data-container-return">
+					<a href="products.html">产品管理</a>
+					<a class="split">/</a>
+					<a href="productsSpec.html">产品工艺</a>
+					<a class="split">/</a>
+					<a href="productsSpec.html">添加工艺</a>
+				</p>
+				<div class="inputs" style="display: block;">
+					<div class="inputs-section">
+						<a>产品名称</a><input class="productName" type="text" placeholder="请输入产品名称" />
+					</div>
+					<div class="inputs-section">
+						<a>进货价</a><input class="productPrice" type="text" placeholder="请输入进货价" />
+					</div>
+					<div class="inputs-section">
+						<a>零售价</a><input class="salesPrice" type="text" placeholder="请输入零售价" />
+					</div>
+					<div class="inputs-section">
+						<a>积分</a><input class="productPoints" type="text" placeholder="请输入积分" />
+					</div>
+					<div class="inputs-section">
+						<a>工艺名称</a><input class="specName" type="text" placeholder="请输入工艺名称" />
+					</div>
+					<div class="inputs-section">
+						<a>产品图片</a>
+						<div class="upimg">
+							<p>点击上传图片</p>
+							<input id="up-btn" onchange="upload(this,this.files)" class="up-btn" type="file"  />
+							<div class="up-pic"></div>
+						</div>
+					</div>
+					<div class="inputs-section" style="margin-top: 5rem;">
+						<button class="save">保存</button>
+					</div>	
+				</div>
+			</div>
+			<div class="clear"></div>
+			
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/jquery-3.2.1.js" ></script>
+	<script type="text/javascript" src="../../js/url_path.js" ></script>
+	<script type="text/javascript" src="../../js/main.js"></script>
+	<script>
+		
+		var basePic;
+		function upload(t,f){
+			var str = "";
+			var imgContainer = $(".up-pic");
+			for(var i=0;i<f.length;i++){
+				var reader = new FileReader();
+				reader.readAsDataURL(f[i]);
+				reader.onload = function(e){
+					str+="<img src='"+e.target.result+"'/>";
+			        imgContainer.html(str);
+				}
+				var file = document.getElementById("up-btn").files[0];
+				console.log(file)
+                r = new FileReader();  //本地预览
+                r.onload = function(){
+                   basePic = r.result;
+                }
+                r.readAsDataURL(file);    //Base64
+              
+			}
+		}
+		$(function(){
+			var productId = sessionStorage.getItem("productId");
+			$(".save").click(function(){
+				var productName = $(".productName").val();
+				var productPrice = $(".productPrice").val();
+				var specName = $(".specName").val();
+				var productPoints = $(".productPoints").val();
+				var salesPrice = $(".salesPrice").val();
+				$.ajax({
+					url:url_path+"/addProductSpec",
+					type:"post",
+					data:{
+						"productId":productId,
+						"productName":productName,
+						"productPrice":productPrice,
+						"specName":specName,
+						"productPoints":productPoints,
+						"salesPrice":salesPrice,
+						"imgUrl":basePic
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.status=="yes"){
+							alert("添加成功")
+							setTimeout(function(){
+								window.location.href = "productsSpec.html";
+							},1000)
+						}else{
+							alert("添加失败")
+						}
+						/*
+						 * 
+						 
+						
+						*/
+					},
+					error:function(){}
+				})
+			})
+
+		})
+	</script>
+</html>

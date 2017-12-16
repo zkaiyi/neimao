@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>人员修改</title>
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/main.css" />
+		<link rel="stylesheet" href="../../css/data-container.css" />		<link rel="shortcut icon" type="image/x-icon" href="../../img/nm.ico" media="screen" />
+		<style>
+
+			.data-container-parts{
+				width: 16.6%;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="title">后台国内销售业务员系统</div>
+			<img src="../../img/quit.png" />
+			<p>Hello，<a id="name"></a></p>
+		</header>
+		<div class="content">
+			<div class="content-left">				<ul>					<li id="agreement"><a href="../protocols/protocols.html">终端管理</a></li>					<li id="order"><a href="../deliveryNotes/deliveryNotes.html">订单管理</a></li>					<li id="visit"><a href="../visit/visit.html">未开发终端管理</a></li>					<li id="product"><a href="../product/products.html">产品管理</a></li>					<li id="user" class="active"><a href="user.html">人员管理</a></li>				</ul>			</div>
+			<div class="content-right">
+					<p class="data-container-return">
+						<a href="user.html">人员管理</a>
+						<a class="split">/</a>
+						<a>人员修改</a>
+					</p>
+					<div class="inputs" style="display: block;">
+						<div class="inputs-section">
+							<a>手机号码</a><input class="proNum mobile" type="text" placeholder="请输入手机号码" />
+						</div>
+						<div class="inputs-section">
+							<a>登录密码</a><input class="proModel password" type="text" placeholder="请输入登录密码" />
+						</div>
+						<div class="inputs-section">
+							<a>甲方代表</a><input class="proGongyi name" type="text" placeholder="请输入甲方代表" />
+						</div>	
+						<div class="inputs-section">
+							<a>甲方名称</a><input class="proAddress represent" type="text" placeholder="请输入甲方名称" />
+						</div>
+						<div class="inputs-section">
+							<a>地址</a><input class="proAddress address" type="text" placeholder="请输入地址" />
+						</div>
+						<div class="inputs-section">
+							<a>区域订单号</a><input class="proAddress areaNo" type="text" placeholder="请输入区域订单号" />
+						</div>
+						<div class="inputs-section">
+							<p class="save-tip">修改成功</p>
+						</div>	
+						<div class="inputs-section">
+							<button class="save">保存</button>
+						</div>	
+					</div>
+			</div>
+			<div class="clear"></div>
+			
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/jquery-3.2.1.js" ></script>
+	<script type="text/javascript" src="../../js/url_path.js" ></script>
+	<script type="text/javascript" src="../../js/main.js"></script>
+	<script>
+		$(function(){
+			var userId = sessionStorage.getItem("userId")
+			$.ajax({
+				type:"post",
+					url:url_path+"/getUsers",
+					type:"post",
+					data:{
+						"page":"1",
+						"num":"1",
+						"userId":userId
+					},
+					dataType:"json",
+					success:function(data){
+						console.log(data)
+						if(data.status=="yes"){
+							var password = sessionStorage.getItem("password");
+							$(".mobile").val(data.users[0].mobile);
+							$(".password").val(password);
+							$(".name").val(data.users[0].name);
+							$(".represent").val(data.users[0].represent);
+							$(".address").val(data.users[0].address);
+							$(".areaNo").val(data.users[0].areaNo);
+						}
+					},
+					error:function(){
+						
+					}
+			});
+			$(".save").click(function(){
+				var mobile = $(".mobile").val();
+					var password = $(".password").val();
+					var name = $(".name").val();
+					var represent = $(".represent").val();
+					var address = $(".address").val();
+					var areaNo = $(".areaNo").val();
+					$.ajax({
+						type:"post",
+						url:url_path+"/updateUser",
+						data:{
+							"mobile":mobile,
+							"password":password,
+							"name":name,
+							"represent":represent,
+							"address":address,
+							"areaNo":areaNo,
+							"userId":userId
+						},
+						dataType:"json",
+						success:function(data){
+							if(data.status=="yes"){
+								$(".save-tip").css({"visibility":"visible","color":"#73BCB5"});
+								setTimeout(function(){
+									window.location.href="user.html"
+								},1000)
+							}
+						},
+						error:function(){}
+					});
+			})
+			$(document).on("click",".lookUp",function(){
+				window.location.href="deliveryNoteInfos.html"
+			})
+		})
+	</script>
+</html>

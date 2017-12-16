@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>信息管理</title>
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/main.css" />
+		<link rel="stylesheet" href="../../css/data-container.css" />		<link rel="shortcut icon" type="image/x-icon" href="../../img/nm.ico" media="screen" />
+		<style>
+			.data-container-parts{
+				width: 20%;
+			}
+			.data-container-return{
+				margin-left:5% ;
+			}
+			.data-container{
+				margin-bottom: 1rem;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="title">后台国内销售业务员系统</div>
+			<img src="../../img/quit.png" />
+			<p>Hello，<a id="name"></a></p>
+		</header>
+		<div class="content">
+			<div class="content-left">
+				<ul>
+				<li id="agreement" class="active"><a href="protocols.html">终端管理</a></li>					<li id="order"><a href="../deliveryNotes/deliveryNotes.html">订单管理</a></li>					<li id="visit"><a href="../visit/visit.html">未开发终端管理</a></li>					<li id="product"><a href="../product/products.html">产品管理</a></li>					<li id="user"><a href="../user/user.html">人员管理</a></li>
+				</ul>
+			</div>
+			<div class="content-right">
+				<div class="data-container">
+					<p class="data-container-return" >
+						<a href="protocols.html">信息管理</a>
+						<a class="split">/</a>
+						<a>信息详情</a>
+					</p>
+					<div class="agreement">
+						<h2>新海打火机产品信息记录</h2>
+						<div class="agreements-container">
+				
+							<div class="names names1">
+								<div class="names-left">
+									<a>甲方名称：</a><input id="firstParty" type="text" value="阿尔萨斯·米奈希尔" readonly="readonly"  /><div class="clear"></div>
+								</div>
+								<div class="names-right">
+									<a>乙方名称：</a><input id="secondParty" type="text" value="沃金" readonly="readonly" /><div class="clear"></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="names names2">
+								<div class="names-left">
+									<a>甲方代表：</a><a id="firstRepresent">阿尔萨斯·米奈希尔</a><div class="clear"></div>
+								</div>
+								<div class="names-right">
+									<a>乙方代表：</a><a id="secondRepresent">沃金</a><div class="clear"></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="names names2">
+								<div class="names-left">
+									<a>地址：</a><a id="firstAddress">悬崖上的牛头小屋</a><div class="clear"></div>
+								</div>
+								<div class="names-right">
+									<a>地址：</a><a id="secondAddress">天涯海角牛头村</a><div class="clear"></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="names names2">
+								<div class="names-left">
+									<a>联系电话：</a><a id="firstMobile">12315</a><div class="clear"></div>
+								</div>
+								<div class="names-right">
+									<a>联系电话：</a><a id="secondMobile">12315</a><div class="clear"></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="names names2">
+								<div class="names-left">
+									<a></a><a></a><div class="clear"></div>
+								</div>
+								<div class="names-right">
+									<a>终端：</a><a>超市</a><div class="clear"></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="names names2">
+								<div class="names-left">
+									<a>日期：</a><a id="firstDate">firstDate</a><div class="clear"></div>
+								</div>
+								<div class="names-right">
+									<a>日期：</a><a id="secondDate">12315</a><div class="clear"></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+								</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+			
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/jquery-3.2.1.js" ></script>
+	<script type="text/javascript" src="../../js/url_path.js" ></script>
+	<script type="text/javascript" src="../../js/main.js"></script>
+	<script>
+		$(function(){
+			var protocolId = sessionStorage.getItem("protocolId");
+			$.ajax({
+				type:"post",
+				url:url_path+"/getProtocolInfo",
+				data:{
+					"protocolId":protocolId,
+					"type":"2"
+				},
+				dataType:"json",
+				success:function(data){								if(data.status=="yes"){						$("#firstParty").val(data.protocolInfo.firstParty);						$("#firstRepresent").html(data.protocolInfo.firstRepresent);						$("#firstMobile").html(data.protocolInfo.firstMobile);						$("#firstDate").html(data.protocolInfo.firstDate);						$("#firstAddress").html(data.protocolInfo.firstAddress);												$("#secondParty").val(data.protocolInfo.secondParty);						$("#secondRepresent").html(data.protocolInfo.secondRepresent);						$("#secondMobile").html(data.protocolInfo.secondMobile);						$("#secondDate").html(data.protocolInfo.secondDate);						$("#secondAddress").html(data.protocolInfo.secondAddress);											}				
+				},
+				error:function(){}
+			});
+		})
+	</script>
+</html>

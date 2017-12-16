@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>订单管理</title>
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/main.css" />
+		<link rel="stylesheet" href="../../css/data-container.css" />		<link rel="stylesheet" href="../../css/DateTimePicker.css" />		<link rel="shortcut icon" type="image/x-icon" href="../../img/nm.ico" media="screen" />
+		<style>
+
+			.data-container-parts{
+				width: 16.6%;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="title">后台国内销售业务员系统</div>
+			<img src="../../img/quit.png" />
+			<p>Hello，<a id="name"></a></p>
+		</header>
+		<div class="content">
+			<div class="content-left">
+				<ul>
+					<li id="agreement"><a href="../protocols/protocols.html">协议管理</a></li>
+					<li id="order" class="active"><a href="deliveryNotes.html">订单管理</a></li>
+					<li id="product"><a href="../product/products.html">产品管理</a></li>
+					<li id="user"><a href="../user/user.html">人员管理</a></li>
+					<li id="message"><a href="../message/message.html">信息管理</a></li>
+					<li id="visit"><a href="../visit/visit.html">拜访管理</a></li>
+				</ul>
+			</div>
+			<div class="content-right">
+				<div>
+					<div class="search">
+						<button class="search-btn">搜索</button>														<input class="search-input search-input22" type="text" placeholder="结束日期" data-field="date" readonly>						<input class="search-input search-input2" type="text" placeholder="开始日期" data-field="date" readonly>												<input class="search-input search-input1" type="text" placeholder="客户编号" />																		<div class="clear"></div>
+					</div>
+			
+					<div class="data-container" id="data-container">
+						<div class="data-container-part data-container-title">
+							<div class="data-container-parts">编号</div>
+							<div class="data-container-parts">业务员</div>
+							<div class="data-container-parts">客户</div>
+							<div class="data-container-parts">金额</div>
+							<div class="data-container-parts">积分</div>
+							<div class="data-container-parts">操作</div>
+							<div class="clear"></div>
+						</div>
+					</div>					<div class="data-container">						<div class="data-container-part data-container-title">							<div class="data-container-parts">总计订单:</div>							<div class="data-container-parts allProtocol"></div>							<div class="data-container-parts">&nbsp;</div>							<div class="data-container-parts">总计业务员</div>							<div class="data-container-parts allUser"></div>							<div class="clear"></div>						</div>					</div>
+					<div class="fenye">						<div class="hide fenye_customerName"></div>
+						<ul>
+							<div class="prev">&lt;</div>
+							<li class="liActive">1</li>
+							<li>2</li>
+							<li>3</li>
+							<div class="next">&gt;</div>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+			
+		</div>		<div class="users">			<div class="user-part userAll" data-userId="">全部</div>			<div class="clear"></div>		</div>		<div class="users-shadow"></div>		<div id="dtBox"></div>
+	</body>
+	<script type="text/javascript" src="../../js/jquery-3.2.1.js" ></script>
+	<script type="text/javascript" src="../../js/url_path.js" ></script>
+	<script type="text/javascript" src="../../js/main.js"></script>	<script type="text/javascript" src="../../js/onload.js" ></script>	<script type="text/javascript" src="../../js/DateTimePicker.js" ></script>	<script type="text/javascript">					$(document).ready(function()			{				$("#dtBox").DateTimePicker({									isPopup: false								});			});			</script>
+	<script>
+		$(function(){
+			var page = "1";
+			var num = "10";			//onloadDeliveryNote(page,num);
+						//onloadonloadProtocolUsers(page,num);			var userId = sessionStorage.getItem("userId")
+			$.ajax({
+				type:"post",
+				url:url_path+"/getDeliveryNote",
+				data:{					"userId":userId,					"page":page,					"num":num				},				dataType:"json",				success:function(data){					console.log(data);					$(".fenye").data("userId",userId);					deliveryNotes_success(data)				},				error:function(){}
+			});			$(document).on("click",".search-btn",function(){				searchData2();			})
+			$(document).on("click",".data-container-parts-userId",function(){				var userId = $(this).data("userid");				$.ajax({					type:"post",					url:url_path+"/getDeliveryNote",					data:{						"userId":userId,						"type":"1",						"page":page,						"num":num					},					dataType:"json",					success:function(data){						deliveryNotes_success(data);						$(".fenye").data("userId",userId);					},					error:function(){}				});			})			/*			 * 						$(document).on("click",".data-container-parts-customerName",function(){				var customerName = $(this).text();				$.ajax({					type:"post",					url:url_path+"/getDeliveryNote",					data:{						"customerName":customerName,						"type":"1",						"page":page,						"num":num					},					dataType:"json",					success:function(data){						deliveryNotes_success(data);						$(".fenye_customerName").html(customerName);					},					error:function(){}				});			})			 */			$(".fenye").on("click","li",function(){				var page = fenye(this);				var dataArrar={};				dataArrar.page=page;				dataArrar.num=num;				dataArrar.type="1"				if($(".fenye").data("userId")!=="" && $(".fenye").data("userId")!=="undefined"){					dataArrar.userId = $(".fenye").data("userId");				}				if($(".fenye_customerName").text()!=="" && $(".fenye_customerName").text()!=="undefined"){					dataArrar.customerName = $(".fenye_customerName").text()				}				$.ajax({					type:"post",					url:url_path+"/getDeliveryNote",					data:dataArrar,					dataType:"json",					success:function(data){												deliveryNotes_success(data)					},					error:function(){}				});			});						$(document).on("click",".search-input3",function(){				$(".users-shadow").fadeIn(500);				$(".users").fadeIn(500);			})			$(document).on("click",".user-part",function(){				$(".user-part").removeClass("user-part-active");				$(this).addClass("user-part-active");				var userId = $(this).data("userid");								$(".search-input3").val($(this).text());				$(".search-input3").attr("id",userId);				setTimeout(function(){					$(".users-shadow").fadeOut(500);					$(".users").fadeOut(500);				},500)							})						
+			$(document).on("click",".lookUp",function(){
+				var deliveryId = $(this).parent().siblings(".deliveryId").text();
+				var allMoney = $(this).parent().siblings(".allMoney").text();
+				var customerName = $(this).parent().siblings(".customerName").text();
+				var mobile = $(this).parent().siblings(".mobile").text();
+				var addTime = $(this).parent().siblings(".addTime").text();
+				var deliveryNo = $(this).parent().siblings(".deliveryNo").text();
+				var represent = $(this).parent().siblings(".represent").text();
+
+				sessionStorage.setItem("deliveryId",deliveryId);
+				sessionStorage.setItem("allMoney",allMoney);
+				sessionStorage.setItem("customerName",customerName);
+				sessionStorage.setItem("mobile",mobile);
+				sessionStorage.setItem("addTime",addTime);
+				sessionStorage.setItem("deliveryNo",deliveryNo);
+				sessionStorage.setItem("represent",represent);
+				window.location.href="deliveryNoteInfos.html"
+			})
+		})
+	</script>
+</html>

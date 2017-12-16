@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>终端管理</title>
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/main.css" />
+		<link rel="stylesheet" href="../../css/data-container.css" />		<link rel="shortcut icon" type="image/x-icon" href="../../img/nm.ico" media="screen" />
+		<style>
+			.data-container-parts{
+				width: 20%;
+			}
+			.data-container-return{
+				margin-left:5% ;
+			}
+			.data-container{
+				margin-bottom: 1rem;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="title">后台国内销售业务员系统</div>
+			<img src="../../img/quit.png" />
+			<p>Hello，<a id="name"></a></p>
+		</header>
+		<div class="content">
+			<div class="content-left">
+				<ul>					<li id="agreement" class="active"><a href="protocols.html">终端管理</a></li>					<li id="order"><a href="../deliveryNotes/deliveryNotes.html">订单管理</a></li>					<li id="visit"><a href="../visit/visit.html">未开发终端管理</a></li>					<li id="product"><a href="../product/products.html">产品管理</a></li>					<li id="user"><a href="../user/user.html">人员管理</a></li>
+				</ul>
+			</div>
+			<div class="content-right">
+				<div class="data-container">
+					<p class="data-container-return" >
+						<a href="protocols.html">协议管理</a>
+						<a class="split">/</a>
+						<a>协议详情</a>
+					</p>
+					<div class="agreement">
+						<h2>新海打火机产品陈列协议</h2>
+						<div class="agreements-container">
+							
+							<div class="names">
+								<div class="names-left">
+									<a>甲方名称：</a><input readonly id="firstParty" type="text" placeholder="甲方名称" /><div class="clear"></div>
+								</div>
+								<div class="names-right">
+									<a>乙方名称：</a><input readonly id="secondParty" type="text" placeholder="乙方名称" /><div class="clear"></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="agreements-detail">
+								<p>甲乙双方就新海打火机的产品陈列一事，自愿达成如下协议：</p>
+								<p class="p1">一、甲方免费提供”新海“牌打火机展示架供乙方使用，专用于”新海“打火机的产品陈列。</p>
+								<p class="p1">二、乙方在满足以下条件时，甲方每月支付乙方产品陈列费<input style="width: 3rem;" readonly id="displayFee" type="text" />元。</p>
+								<p>1、乙方将展示架摆放在双方约定的店面位置；</p>
+								<p>2、乙方在使用展架期间，不得在展示架上摆放非甲方的产品；</p>
+								<p>3、陈列品项要求：协议期内，乙方应至少陈列甲方产品<input style="width: 3rem;" readonly id="displayClass" type="text"/>类；</p>
+								<p>4、乙方按甲方要求使用展示架，甲方将连续<input style="width: 3rem;" readonly id="displayMonth" type="text"/>个月支付乙方陈列费；</p>
+								<p class="p1">三、本协议期结束后，乙方需继续按甲方要求使用展示架，否则甲方有权收回产品展示陈列用具。</p>
+								<p class="p1">四、本协议一式两份，双方各执一份。经双方代表签字生效。</p>
+							</div>
+							<div class="agreements-foot">
+								<div class="qianming">
+									<div class="qianming2">
+										<img src="" id="signImg1" />
+									</div>
+								</div>
+								<div class="qianming">
+									<div class="qianming2">
+										<img src="" id="signImg2" />
+									</div>
+								</div>
+								<div class="clear"></div>
+								<div class="names">
+									<div class="names-left">
+										<a>甲方代表：</a><input readonly type="text" id="firstRepresent" placeholder="甲方代表" /><div class="clear"></div>
+										<a>地址：</a><input readonly type="text" id="firstAddress" placeholder="地址" /><div class="clear"></div>
+										<a>联系电话：</a><input readonly type="text" id="firstMobile" placeholder="联系电话" /><div class="clear"></div>
+										<a>日期：</a><input readonly type="text" id="firstDate" placeholder="日期" /><div class="clear"></div>
+									</div>
+									<div class="names-right">
+										<a>乙方代表：</a><input readonly type="text" id="secondRepresent" placeholder="乙方代表" /><div class="clear"></div>
+										<a>地址：</a><input readonly type="text" id="secondAddress" placeholder="地址" /><div class="clear"></div>
+										<a>联系电话：</a><input readonly type="text" id="secondMobile" placeholder="联系电话" /><div class="clear"></div>
+										<a>超市：</a><input readonly type="text" value="超市" /><div class="clear"></div>
+										<a>日期：</a><input readonly type="text" id="secondDate" placeholder="日期" /><div class="clear"></div>
+									</div>
+									<div class="clear"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+			
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/jquery-3.2.1.js" ></script>
+	<script type="text/javascript" src="../../js/url_path.js" ></script>
+	<script type="text/javascript" src="../../js/main.js"></script>
+	<script>
+		$(function(){			var protocolId = sessionStorage.getItem("protocolId");			
+			$.ajax({
+				type:"post",
+				url:url_path+"/getProtocolInfo",
+				data:{					"protocolId":protocolId,					"type":"1"				},				dataType:"json",				success:function(data){					if(data.status=="yes"){						$("#firstParty").val(data.protocolInfo.firstParty);						$("#secondParty").val(data.protocolInfo.secondParty);						$("#displayFee").val(data.protocolInfo.displayFee);						$("#displayClass").val(data.protocolInfo.displayClass);						$("#displayMonth").val(data.protocolInfo.displayMonth);												$("#firstRepresent").val(data.protocolInfo.firstRepresent);						$("#firstAddress").val(data.protocolInfo.firstAddress);						$("#firstMobile").val(data.protocolInfo.firstMobile);						$("#firstDate").val(data.protocolInfo.firstDate);						$("#secondRepresent").val(data.protocolInfo.secondRepresent);						$("#secondAddress").val(data.protocolInfo.secondAddress);						$("#secondMobile").val(data.protocolInfo.secondMobile);						$("#secondDate").val(data.protocolInfo.secondDate);												$("#signImg1").attr("src",data.protocolInfo.signImg1);						$("#signImg2").attr("src",data.protocolInfo.signImg2);					}				},				error:function(){									}
+			});
+
+		})
+	</script>
+</html>

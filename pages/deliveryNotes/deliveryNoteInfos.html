@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>订单管理</title>
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/main.css" />
+		<link rel="stylesheet" href="../../css/data-container.css" />		<link rel="shortcut icon" type="image/x-icon" href="../../img/nm.ico" media="screen" />
+		<style>
+			.data-container-parts{
+				width: 16.6%;
+			}
+			.data-container-parts2{
+				width: 25%;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="title">后台国内销售业务员系统</div>
+			<img src="../../img/quit.png" />
+			<p>Hello，<a id="name"></a></p>
+		</header>
+		<div class="content">
+			<div class="content-left">				<ul>					<li id="agreement"><a href="../protocols/protocols.html">终端管理</a></li>					<li id="order" class="active"><a href="deliveryNotes.html">订单管理</a></li>					<li id="visit"><a href="../visit/visit.html">未开发终端管理</a></li>					<li id="product"><a href="../product/products.html">产品管理</a></li>					<li id="user"><a href="../user/user.html">人员管理</a></li>				</ul>			</div>
+			<div class="content-right">
+				<div>
+					<div class="data-container">
+						<p class="data-container-return">
+							<a href="deliveryNotes.html">订单管理</a>
+							<a class="split">/</a>
+							<a>订单详情</a>
+						</p>
+						<div class="data-container-part data-container-title" id="deliveryNoteInfos">
+							<div class="data-container-parts">产品</div>
+							<div class="data-container-parts">规格</div>
+							<div class="data-container-parts">单位</div>
+							<div class="data-container-parts">数量</div>
+							<div class="data-container-parts">单价</div>
+							<div class="data-container-parts">金额</div>
+							<div class="clear"></div>
+						</div>
+						
+						
+						<div class="data-container-part data-container-detail">
+							<div class="data-container-parts">总计金额：</div>
+							<div class="data-container-parts"></div>
+							<div class="data-container-parts"></div>
+							<div class="data-container-parts"></div>
+							<div class="data-container-parts"></div>
+							<div class="data-container-parts allMoney">16000</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+					
+					<div class="data-container">
+						
+						<div class="data-container-part data-container-title" style="margin-top: 3rem;margin-bottom: 3rem;">
+							<div class="data-container-parts data-container-parts2">客户名称：</div>
+							<div class="data-container-parts data-container-parts2 customerName">印第安男孩</div>
+							<div class="data-container-parts data-container-parts2">客户电话：</div>
+							<div class="data-container-parts data-container-parts2 mobile">13000000001</div>
+							<div class="data-container-parts data-container-parts2">下单时间：</div>
+							<div class="data-container-parts data-container-parts2 addTime">2017-09-19 08:35:10</div>
+							<div class="clear"></div>
+						</div>
+						<div class="data-container-part data-container-title" style="margin-top: 3rem;">
+							<div class="data-container-parts data-container-parts2">送货单位：</div>
+							<div class="data-container-parts data-container-parts2 represent">暴风城</div>
+							<div class="data-container-parts data-container-parts2">联系电话：</div>
+							<div class="data-container-parts data-container-parts2 deliveryNo">13000000002</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+			
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/jquery-3.2.1.js" ></script>
+	<script type="text/javascript" src="../../js/url_path.js" ></script>
+	<script type="text/javascript" src="../../js/main.js"></script>
+	<script>
+		$(function(){
+			var deliveryId = sessionStorage.getItem("deliveryId")
+			var allMoney = sessionStorage.getItem("allMoney")
+			var customerName = sessionStorage.getItem("customerName")
+			var mobile = sessionStorage.getItem("mobile")
+			var addTime = sessionStorage.getItem("addTime")
+			var represent = sessionStorage.getItem("represent")
+			var deliveryNo = sessionStorage.getItem("deliveryNo")
+			
+			$(".allMoney").html(allMoney)
+			$(".customerName").html(customerName)
+			$(".mobile").html(mobile)
+			$(".addTime").html(addTime)
+			$(".represent").html(represent)
+			$(".deliveryNo").html(deliveryNo)
+			$.ajax({
+				type:"post",
+						url:url_path+"/getDeliveryNoteInfo",
+						data:{
+							"deliveryId":deliveryId
+						},
+						dataType:"json",
+						success:function(data){							console.log(data)
+							if(data.status=="yes"){
+								for(var i=0;i<data.deliveryNoteInfos.length;i++){
+									var html = '<div class="data-container-part data-container-detail">'+
+												'<div class="data-container-parts">'+data.deliveryNoteInfos[i].productName+'</div>'+
+												'<div class="data-container-parts">'+data.deliveryNoteInfos[i].specName+'</div>'+
+												'<div class="data-container-parts">'+data.deliveryNoteInfos[i].uint+'</div>'+
+												'<div class="data-container-parts">'+data.deliveryNoteInfos[i].number+'</div>'+
+												'<div class="data-container-parts">'+data.deliveryNoteInfos[i].price+'</div>'+
+												'<div class="data-container-parts">'+data.deliveryNoteInfos[i].allPrice+'</div>'+
+												'<div class="clear"></div>'+
+											'</div>';
+									$("#deliveryNoteInfos").after(html)
+								}
+								
+							}
+						}
+			});
+			$(document).on("click",".lookUp",function(){
+				window.location.href="protocolsDetail.html"
+			})
+		})
+	</script>
+</html>

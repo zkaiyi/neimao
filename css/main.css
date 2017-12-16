@@ -1,0 +1,263 @@
+html{
+	font-size: 62.5%;height: 100%;
+}
+header{
+	background: #74C1B5;height: 10rem;line-height: 10rem;text-align: center;
+}
+header p{
+	height: 10rem;line-height: 10rem;float: right;color: #FFFFFF;margin-right: 3%;font-size: 3rem;
+}
+header img{
+	height: 3rem;margin-top:3.5rem;float: right;margin-right: 3%;
+}
+header .title{
+	height: 10rem;line-height: 10rem;float: left;color: #FFFFFF;margin-right: 3%;font-size: 3rem;margin-left: 3%;
+}
+button:hover{
+	cursor: pointer;
+}
+.clear{
+	clear: both;
+}
+a{
+	text-decoration: none;color: #000000;
+}
+
+.content-left{
+	width: 18%;height: 100%;float: left;
+}
+.content-right{
+	width: 80%;float: right;height: 100%;
+}
+body{
+	max-height: 100%;height: 100%;width: 100%;max-width: 100%;
+}
+.content{
+	height: calc(100% - 11.5rem);height: -webkit-calc(100% - 11.5rem);margin-top: 1rem;
+}
+.content-left li{
+	list-style-type: none;width: 100%;text-align: center;height: 8rem;line-height:8rem;font-size: 1.5rem;border: 1px solid gainsboro;cursor: pointer;
+}
+.nav-a{
+	text-decoration: none;color: #74C1B5;
+}
+.active{
+	background-color: #74C1B5;color: #FFFFFF;
+}
+.position{
+	font-size: 2rem;height: 5rem;line-height: 5rem;
+}
+.search{
+	border: 1px solid gainsboro;padding:2rem 0;width:95%;font-size: 2rem;
+}
+.search select{
+	padding: 1rem 0;width: 19%;border: 1px solid gainsboro;padding-left: 1%;float: right;margin-right: 3%;
+}
+.search input{
+	padding: 1rem 0;width: 15%;border: 1px solid gainsboro;padding-left: 1%;float: right;margin-right: 3%;
+}
+.search button{
+	padding: 1rem 0;width: 10%;background-color: #74C1B5;color: #FFFFFF;border: none;border-radius: 5px;float: right;margin-right: 3%;
+}
+table,tr,td{
+	border-collapse: collapse;border: 1px solid gainsboro;font-size:1.8rem;
+}
+tr td{
+	width: 15%;padding: 3rem;position: relative;
+}
+tr td:nth-child(5){
+	width: 40%;
+}
+table{
+	width: 95%;text-align: center;
+}
+td button{
+	border: none;background:#74C1B5;color: #FFFFFF;width: 30%;margin:0 10%;padding: 1rem 0;font-size: 1rem;border-radius: 5px;
+}
+.buttons{
+	font-size: 0;
+}
+.sel{
+	position: absolute;top: 0;left: 0;width: 2rem;height: 2rem;
+    background-image: url(../img/sel2.png);
+    background-repeat: no-repeat;
+    background-position: center ;
+    background-size:contain ;
+}
+.pro-img{
+	height: 6rem;
+}
+.inputs{
+	width: 95%;border: 1px solid gainsboro;padding-bottom: 3rem;
+}
+.inputs-section{
+	margin-top: 2rem;font-size: 1rem;
+}
+.inputs-section a{
+	display: inline-block;height: 3rem;line-height: 3rem;width: 20%;text-align: center;
+}
+.inputs-section input{
+	display: inline-block;height: 3rem;line-height: 3rem;width: 40%;border: 1px solid gainsboro;padding-left: 5%;font-size: 1rem;
+}
+/*
+ * 上传图片
+ */
+.uppic{
+	width: 60%;height: 10rem;background-color: gainsboro;line-height: 10rem;
+}
+.uppic img{
+	height:10rem;line-height: 10rem;width: 100%;text-align: center;
+}
+
+/*
+ * 
+ */
+
+.inputs-section2{
+	margin-top: 3rem;
+}
+.save,.cancle{
+	border: none;background-color:#73BCB5 ;color: #FFFFFF;border-radius: 5px;height:2rem;line-height: 2rem;width:10%;font-size: 1rem;margin-left: 5%;
+}
+.shadow{
+	background: #080808;opacity: 0.4;height: 100%;width: 100%;position: fixed;top: 0;left: 0;z-index: 666;
+}
+.agreements{
+	z-index: 998;position: absolute;top: 0;left: 0;width: 70%;text-align: center;margin-left: 15%;top: 5rem;
+	background: url(../img/close.png) no-repeat #FFFFFF right top/5rem;padding-bottom: 5rem;
+}
+.agreements input{
+	
+}
+.agreements h2{
+	height: 6rem;line-height: 6rem;font-size: 2.5rem;margin-bottom: 3rem;
+}
+.agreements-container{
+	width: 90%;margin-left: 5%;padding-bottom: 5rem;
+}
+.names1{
+	margin-bottom: 5rem;
+}
+.names-left,.names-right{
+	width: 45%;padding-left: 5%;float: left;padding: 1rem 0;font-size: 2rem;font-size: 0;text-align: center;
+}
+
+.names a{
+	font-size: 1rem;width: 40%;float: left;padding: 1rem 0
+}
+.names input{
+	font-size: 1rem;width: 45%;float: left;padding: 1rem 0;padding-left: 5%;
+}
+.agreements-detail{
+	text-align: left;margin-left: 5%;margin-top: 4rem;
+}
+.agreements-detail p{
+	font-size: 1.5rem;margin-top: 1rem;
+}
+.agreements-detail .p1{
+	margin-top: 2rem;
+}
+.agreements-detail input{
+	margin: 0 1rem;font-size: 2rem;padding: 0.5rem;
+}
+.agreements-foot{
+	margin-top: 5rem;padding-bottom: 1rem;
+}
+.qianming{
+	width: 40%;margin: 0 5%;border-bottom: 1px solid gainsboro;height: 6rem;float: left;
+}
+.qianming2{
+	width: 60%;margin-left: 20%;height: 4rem;margin-top: 1rem;border: 1px solid gainsboro;border-radius: 5px;line-height: 4rem;text-align: center;
+}
+input{
+	border: 1px solid gainsboro;
+}
+.qianming-save,.qianming-cancle{
+	border: none;background-color:#73BCB5 ;color: #FFFFFF;border-radius: 5px;height:5rem;line-height: 5rem;width: 30%;margin: 0 10%;
+}
+.qianming-buttons{
+	margin: 3rem 0;font-size: 1.5rem;
+}
+.order-detail{
+	margin-top: 3rem;
+}
+.order-detail p{
+	font-size: 2rem;text-align: left;padding: 2rem 0;
+}
+.order-detail-left,.order-detail-right{
+	width: 50%;float: left;
+}
+
+.order-detail-return{
+	border: none;background-color:#73BCB5 ;color: #FFFFFF;border-radius: 5px;height:3rem;line-height: 3rem;width: 10%;margin-top: 3rem;
+}
+.order-detail-div{
+	margin-top: 3rem;padding-left: 5%;
+}
+.order-detail-div p{
+	
+}
+.fenye{
+	width: 100%;text-align: center;margin-top: 3rem;padding-bottom: 3rem;
+}
+.fenye li{
+	width: 2rem;height: 2rem;display: inline-block;list-style-type: none;line-height: 2rem;font-size: 1rem;margin: 0 1rem;cursor: pointer;
+}
+.liActive{
+	border-bottom: 3px solid #73BCB5;color: #73BCB5;font-weight: bold;
+}
+
+.table2{
+	width: 100%;margin-top: 3rem;
+}
+
+
+.reason{
+	width: 95%;border: 1px solid gainsboro;display: none;
+}
+.reason-return{
+	padding: 1rem 0;text-align: left;border-bottom: 3px solid gainsboro;margin-bottom: 3rem;
+}
+.reason-return button{
+	width: 10%;margin-left: 0;border: none;background-color:#73BCB5 ;color: #FFFFFF;border-radius: 5px;height:3rem;line-height: 3rem;
+}
+.reasons{
+	margin-left: 1%;width: 98%;
+}
+.reasons p{
+	height: 5rem;line-height:5rem;font-size: 2rem;
+}
+.reasons .time{
+	text-align: right;margin-right:3%;font-size: 1.5rem;
+}
+.reasons textarea{
+	resize: none;width: 98%;height: 10rem;border: none;background-color: #F3F2F2;font-size: 2rem;
+}
+.prev,.next{
+	display: inline-block;cursor: pointer;font-size: 1.5rem;
+}
+
+.save-tip{
+	color: red;padding-left: 5%;visibility: hidden;font-size: 3rem;
+}
+.deliveryNotes,.protocols{
+	display: none;
+}
+
+.content-left a{
+	width: 100%;height: 100%;display: block;
+}
+.hide{
+	display: none;
+}
+
+.active a{
+	color: #FFFFFF;
+}
+#name{
+	color: #FFFFFF;font-size: 3.5rem;
+}
+header img{
+	cursor: pointer;
+}
+.qianming img{	height: 4rem;}.users-shadow{	width: 100%;height: 100%;background-color:rgba(103,103,103,0.8) ;position: fixed;top: 0;left: 0;z-index: 2;display: none;}.users{	background-color: #FFFFFF;width: 60%;left: 20%;padding: 5rem;position:fixed ;top: 0;z-index: 3;top: 20%;display: none;border-radius: 1rem;}.user-part{	border: 2px solid #74C1B5;display: inline-block;border-radius:5px ;width: 20%;height: 3rem;line-height: 3rem;margin: 1rem;text-align: center;cursor: pointer;}.user-part-active{	background-color: #74C1B5;color: #FFFFFF;}.allProtocol,.allUser{	font-size: 2rem;color: orangered;font-weight: bold;}.navs{	background-color: #74C1B5;color: #000000;padding: 3rem 0;width: 95%;margin-bottom: 1rem;}.navs-part-left{	width: 50%;float: left;}.navs-part-right{	float: left;width: 50%;}.navs-part{	background-color: #FFFFFF;width: 40%;margin: 0 5%;float: left;padding: 1rem 0;line-height: 3rem;text-align: center;margin-top: 3rem;border-radius: 1rem;cursor: pointer;}.navs-part-name{	font-size: 2rem;}.navs-part-company{	font-size: 1.5rem;}.data-container-parts-userId,.data-container-parts-customerName{	cursor: pointer;}.navs-toggle{	padding: 1rem 0;font-size: 2.5rem;text-align: center;color: #FFFFFF;}.navs-toggle a{	font-size: 2rem;color: #ffffff;text-decoration: underline;margin-left: 1rem;cursor: pointer;}.navs-container{	}.hide{	display: none;}.navs-customerNum:hover{	color: #74C1B5;font-size: 2rem;}.search2{	height: 5rem;width: 95%;}.search2 .search-input{	height: 3rem;text-align: center;}.data-container-parts{	width: 20%;}.search-btn3{	height: 3rem;border: none;background-color: #FFFFFF;border-radius: 5px;color: #74C1B5;vertical-align: middle;padding: 0 1rem;float: right;	margin-left: 3rem;}.search-input2{	float: right;}

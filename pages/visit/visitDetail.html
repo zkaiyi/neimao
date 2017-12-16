@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>订单管理</title>
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/main.css" />
+		<link rel="stylesheet" href="../../css/data-container.css" />		<link rel="shortcut icon" type="image/x-icon" href="../../img/nm.ico" media="screen" />
+		<style>
+			.data-container-parts{
+				width: 16.6%;
+			}
+			.data-container-parts2{
+				width: 25%;
+			}
+			.visit-detail-p{
+				padding-left: 5%;
+			}
+			.visit-detail-p1{
+				padding: 2rem 0 2rem 5%;
+			}
+			.visit-detail-p2{
+				width: 90%;padding-bottom: 3rem;line-height: 1.5rem;padding: 2rem 0 2rem 5%;
+			}
+			.visit-detail-p3{
+				padding-bottom: 2rem;padding: 2rem 0 2rem 5%;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="title">后台国内销售业务员系统</div>
+			<img src="../../img/quit.png" />
+			<p>Hello，<a id="name"></a></p>
+		</header>
+		<div class="content">
+			<div class="content-left">				<ul>					<li id="agreement"><a href="../protocols/protocols.html">终端管理</a></li>					<li id="order"><a href="../deliveryNotes/deliveryNotes.html">订单管理</a></li>					<li id="visit" class="active"><a href="visit.html">未开发终端管理</a></li>					<li id="product"><a href="../product/products.html">产品管理</a></li>					<li id="user"><a href="../user/user.html">人员管理</a></li>				</ul>			</div>
+			<div class="content-right">
+				<div class="data-container" id="data-container">
+					<p class="data-container-return">
+						<a href="visit.html">拜访管理</a>
+						<a class="split">/</a>
+						<a>拜访详情</a>
+					</p>
+				</div>
+			</div>
+			<div class="clear"></div>
+			
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/jquery-3.2.1.js" ></script>
+	<script type="text/javascript" src="../../js/url_path.js" ></script>
+	<script type="text/javascript" src="../../js/main.js"></script>
+	<script>
+		$(function(){
+			var visitId = sessionStorage.getItem("visitId");
+			$.ajax({
+				type:"post",
+					url:url_path+"/getVisitRegistLog",
+					data:{
+						"visitId":visitId,
+						"type":"2"
+					},
+					dataType:"json",
+					success:function(data){
+						console.log(data)
+						if(data.status=="yes"){
+							for(var i=0;i<data.visitRegistLogs.length;i++){
+								var html = '<div class="data-container-part data-container-title">'+
+											'<p class="visit-detail-p1">未开发原因</p>'+
+											'<p class="visit-detail-p2">'+data.visitRegistLogs[i].reason+'</p>'+
+											'<p class="visit-detail-p3">'+data.visitRegistLogs[i].addTime+'</p>'+
+										'</div>';
+								$("#data-container").append(html)
+							}
+							
+						}
+					},
+					error:function(){}
+			});
+		})
+	</script>
+</html>

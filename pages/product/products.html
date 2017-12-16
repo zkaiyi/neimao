@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>订单管理</title>
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/main.css" />
+		<link rel="stylesheet" href="../../css/data-container.css" />		<link rel="shortcut icon" type="image/x-icon" href="../../img/nm.ico" media="screen" />
+		<style>
+
+			.data-container-parts{
+				width: 20%;
+			}
+			.data-container-parts:nth-child(3){
+				width:60% ;
+			}
+			.data-container-parts img{
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="title">后台国内销售业务员系统</div>
+			<img src="../../img/quit.png" />
+			<p>Hello，<a id="name"></a></p>
+		</header>
+		<div class="content">
+			<div class="content-left">				<ul>					<li id="agreement"><a href="../protocols/protocols.html">终端管理</a></li>					<li id="order"><a href="../deliveryNotes/deliveryNotes.html">订单管理</a></li>					<li id="visit"><a href="../visit/visit.html">未开发终端管理</a></li>					<li id="product" class="active"><a href="products.html">产品管理</a></li>					<li id="user"><a href="../user/user.html">人员管理</a></li>				</ul>			</div>
+			<div class="content-right">
+				<div>
+					<div class="search">
+						<button class="addProduct">添加</button>
+						<div class="clear"></div>
+					</div>
+					<div class="data-container" id="data-container">
+						<div class="data-container-part data-container-title">
+							<div class="data-container-parts">编号</div>
+							<div class="data-container-parts">产品型号</div>
+							<div class="data-container-parts">操作</div>
+							<div class="clear"></div>
+						</div>
+					</div>					<div class="data-container">						<div class="data-container-part data-container-title">							<div class="data-container-parts">总计产品:</div>							<div class="data-container-parts allProtocol"></div>							<div class="clear"></div>						</div>					</div>				
+					<div class="fenye">
+						<ul>
+							<div class="prev">首页</div>
+							<li class="liActive">1</li>
+							<li>2</li>
+							<li>3</li>
+							<div class="next">尾页</div>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+			
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/jquery-3.2.1.js" ></script>
+	<script type="text/javascript" src="../../js/url_path.js" ></script>
+	<script type="text/javascript" src="../../js/main.js"></script>
+	<script>
+		$(function(){
+			var page = "1";
+			var num = "10"
+			$.ajax({
+				type:"post",
+					url:url_path+"/getProducts",
+					data:{
+						"page":page,
+						"num":num
+					},
+					dataType:"json",
+					success:function(data){						console.log(data)						products_success(data)
+						
+					}
+			});			$(".fenye").on("click","li",function(){				var page = fenye(this);				$.ajax({					type:"post",					url:url_path+"/getProducts",					data:{						//"userId":userId,						"page":page,						"num":num					},					dataType:"json",					success:function(data){						products_success(data)					},					error:function(){}				});			});			$(".prev").click(function(){				var page = "1";				$.ajax({					type:"post",					url:url_path+"/getProducts",					data:{						//"userId":userId,						"page":page,						"num":num					},					dataType:"json",					success:function(data){						products_success(data)					},					error:function(){}				});			})			$(".next").click(function(){				var allProtocol = parseInt($(".allProtocol").text());								var page = String(Math.ceil(allProtocol/10));				$.ajax({					type:"post",					url:url_path+"/getProducts",					data:{						//"userId":userId,						"page":page,						"num":num					},					dataType:"json",					success:function(data){						products_success(data)					},					error:function(){}				});			})
+			$(document).on("click",".gongyi",function(){
+				var productId = $(this).parent().siblings(".productId").text()
+				sessionStorage.setItem("productId",productId)
+				window.location.href="productsSpec.html"
+			})
+			$(document).on("click",".update",function(){
+				var productId = $(this).parent().siblings(".productId").text()
+				sessionStorage.setItem("productId",productId)
+				window.location.href="productsUpdate.html"
+			})
+			$(".addProduct").click(function(){
+				window.location.href="productsAdd.html"
+			})
+		})
+	</script>
+</html>

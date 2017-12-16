@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>产品工艺</title>
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/main.css" />
+		<link rel="stylesheet" href="../../css/data-container.css" />		<link rel="shortcut icon" type="image/x-icon" href="../../img/nm.ico" media="screen" />
+		<style>
+
+			.data-container-parts{
+				width: 10%;height: 10rem;line-height: 10rem;
+			}
+			.data-container-parts:nth-child(5){
+				width: 40%;
+			}
+			.data-container-parts:nth-child(6){
+				width: 20%;
+			}
+			.pro-img{
+				height: 8rem;margin-top: 1rem;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="title">后台国内销售业务员系统</div>
+			<img src="../../img/quit.png" />
+			<p>Hello，<a id="name"></a></p>
+		</header>
+		<div class="content">
+			<div class="content-left">				<ul>					<li id="agreement"><a href="../protocols/protocols.html">终端管理</a></li>					<li id="order"><a href="../deliveryNotes/deliveryNotes.html">订单管理</a></li>					<li id="visit"><a href="../visit/visit.html">未开发终端管理</a></li>					<li id="product" class="active"><a href="products.html">产品管理</a></li>					<li id="user"><a href="../user/user.html">人员管理</a></li>				</ul>			</div>
+			<div class="content-right">
+					<div style="margin-bottom: 5rem;">
+
+						<p class="data-container-return">
+							<a href="products.html">产品管理</a>
+							<a class="split">/</a>
+							<a>产品工艺</a>
+							<a href="productsSpecAdd.html" style="margin-left: 5rem;">添加工艺</a>
+						</p>
+	
+						
+						<div class="data-container" id="data-container">
+							<div class="data-container-part data-container-title">
+								<div class="data-container-parts">产品工艺</div>
+								<div class="data-container-parts">进价</div>
+								<div class="data-container-parts">零售价</div>
+								<div class="data-container-parts">积分</div>
+								<div class="data-container-parts">产品图片</div>
+								<div class="data-container-parts">操作</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div class="fenye">
+							<ul>
+								<div class="prev">&lt;</div>
+								<li class="liActive">1</li>
+								<li>2</li>
+								<li>3</li>
+								<div class="next">&gt;</div>
+							</ul>
+						</div>
+					</div>
+			</div>
+			<div class="clear"></div>
+			
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/jquery-3.2.1.js" ></script>
+	<script type="text/javascript" src="../../js/url_path.js" ></script>
+	<script type="text/javascript" src="../../js/main.js"></script>
+	<script>
+		$(function(){
+	
+			var page = "1";
+			var num = "5";
+			var productId = sessionStorage.getItem("productId");
+			
+			console.log(productId)
+			$.ajax({
+				type:"post",
+				url:url_path+"/getProductSpec",
+				data:{
+					"productId":productId,
+					"page":page,
+					"num":num
+				},
+				dataType:"json",
+				success:function(data){
+					if(data.status=="yes"){
+						for(var i=0;i<data.productSpecs.length;i++){
+							var html = '<div class="data-container-part data-container-title">'+
+											'<div class="data-container-parts">'+data.productSpecs[i].specName+'</div>'+
+											'<div class="data-container-parts">'+data.productSpecs[i].productPrice+'</div>'+
+											'<div class="data-container-parts">'+data.productSpecs[i].salesPrice+'</div>'+
+											'<div class="data-container-parts">'+data.productSpecs[i].productPoints+'</div>'+
+											'<div class="data-container-parts"><img class="pro-img" src="'+data.productSpecs[i].imgUrl+'" /></div>'+
+											'<div class="data-container-parts">'+
+												'<button class="data-container-part-lookUp">修改</button>|'+
+												'<button class="data-container-part-lookUp">删除</button>'+
+											'</div>'+
+											'<div class="clear"></div>'+
+										'</div>';
+							$("#data-container").append(html)
+						}
+					}else if(data.status=="no"){
+						var html = '<div class="data-container-part data-container-title">'+
+										'<div class="data-container-parts">暂无数据</div>'+
+										'<div class="data-container-parts">暂无数据</div>'+
+										'<div class="data-container-parts">暂无数据</div>'+
+										'<div class="data-container-parts">暂无数据</div>'+
+										'<div class="data-container-parts">暂无数据</div>'+
+										'<div class="data-container-parts">操作</div>'+
+										'<div class="clear"></div>'+
+									'</div>';
+						$("#data-container").append(html)
+					}
+					
+				},
+				error:function(){
+					
+				}
+			});
+			$(document).on("click",".change",function(){
+				var userId = $(this).parent().siblings(".userId").text()
+				sessionStorage.setItem("userId",userId)
+				window.location.href="userChange.html"
+			})
+			$(".addProduct").click(function(){
+				window.location.href="userAdd.html"
+			})
+		})
+	</script>
+</html>
